@@ -13,15 +13,33 @@ tree -P "EXAMPLE.org|README.org"
 #+RESULTS:
 #+begin_example
 .
+├── algorithms
+│   └── EXAMPLE.org
+├── concepts
+│   └── EXAMPLE.org
 ├── languages
 │   └── EXAMPLE.org
 └── README.org
 
-1 directory, 2 files
+3 directories, 4 files
 #+end_example
 
-The languages directory contains language specific notes, as well as an =EXAMPLE.org= file, which serves as a blueprint for new languages.
+* Algorithms
+The algorithms directory contains notes on specific algorithms, as well as an =EXAMPLE.org= file, which serves as a blueprint for new algorithms.
 
-The =LANGUAGE.org= file contains general information, such as *Set-up* instructions, *Snippets* (For when you haven't touched a language in a year and want to quickly refresh your mind on what the syntax looked like; This includes /Reading & Writing from and to stdin, stout & files/, /Common string operations/, /Type conversion/, /Comparisons & Boolean Operators/, /Flow-Control (If, else if, else, while, for, for-each)/, /Importing packages and files/, /Defining and using classes/, /defining and using functions/, /The available primitive data types/ and /data structures/.), *Troubleshooting* (Errors one might encounter and their solutions), and *Frameworks* (Which each can contain a /Set-up/, /Snippets/ and /Troubleshooting/ section.).
+An =ALGORITHM.org= file contains a *Summary* (What does the algorithm do; What is it trying to solve; What's the complexity;), an *Explanation* (A general, detailed explanation of how the algorithm operates), an *Example* (One or more walk-throughs through the algorithm with sample data) and *Pseudo-codes* (An implementation of the algorithm described using pseudo-code).
 
+* Concepts
+The concepts directory contains notes on specific concepts, as well as an =EXAMPLE.org= file, which serves as a blueprint for new concepts.
+
+A =CONCEPT.org= file contains a *Summary* (What it the concept), an *Explanation* (A general, detailed explanation of the concept), and an *Example* (If applicable, a walk-through with sample data).
+
+
+* Languages
+The languages directory contains notes on specific languages, as well as an =EXAMPLE.org= file, which serves as a blueprint for new languages.
+
+A =LANGUAGE.org= file contains general information, such as *Set-up* instructions, *Snippets* (For when you haven't touched a language in a year and want to quickly refresh your mind on what the syntax looked like; This includes /Reading & Writing from and to stdin, stout & files/, /Common string operations/, /Type conversion/, /Comparisons & Boolean Operators/, /Flow-Control (If, else if, else, while, for, for-each)/, /Importing packages and files/, /Defining and using classes/, /defining and using functions/, /The available primitive data types/ and /data structures/.), *Troubleshooting* (Errors one might encounter and their solutions), and *Frameworks* (Which each can contain a /Set-up/, /Snippets/ and /Troubleshooting/ section.).
+
+
+* General
 When something is written in all caps, that means its a variable which should be replaced.
