@@ -1,0 +1,9 @@
+#+TITLE: CONCEPT
+#+AUTHOR: AUTHOR
+#+EMAIL: EMAIL
+#+LANGUAGE: en
+#+FILETAGS: :CONCEPT:
+
+* Summary :summary:
+* Explanation :explanation:
+* Example :example:
