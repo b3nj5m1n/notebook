@@ -229,7 +229,7 @@ Output
 #+begin_example
 Output
 #+end_example
-**** If, else if, else, finally :if:else_if:else:finally:
+**** If, else if, else :if:else_if:else:
 #+begin_src LANG :results output :exports both :wrap example
 # CODE
 #+end_src
@@ -258,7 +258,7 @@ Output
 #+end_src
 *** Classes :class:
 **** Define Class :define_class:
-#+begin_src LANG :results none :exports code :eval never
+#+begin_src LANG :session class_example :results none :exports code
 # CODE
 #+end_src
 **** Access Modifiers :access_modifiers:
@@ -275,16 +275,16 @@ Output
 # CODE
 #+end_src
 **** Initialize Object
-#+begin_src LANG :results none :exports code :eval never
+#+begin_src LANG :session class_example :results none :exports both
 # CODE
 #+end_src
 *** Functions :function:
 **** Define Function
-#+begin_src LANG :results none :exports code :eval never
+#+begin_src LANG :session function_example :results none :exports code
 # CODE
 #+end_src
 **** Call Function
-#+begin_src LANG :results output :exports both :wrap example
+#+begin_src LANG :session function_example :results output :exports both :wrap example
 # CODE
 #+end_src
 
@@ -316,11 +316,11 @@ Output
 *** Data Structures :data_structure:
 **** Array :array:
 ***** Initialize
-#+begin_src LANG :results none :exports code :eval never
+#+begin_src LANG :session array_example :results none :exports code
 # CODE
 #+end_src
 ***** Use
-#+begin_src LANG :results output :exports both :wrap example
+#+begin_src LANG :session array_example :results output :exports both :wrap example
 # CODE
 #+end_src
 
@@ -330,11 +330,11 @@ Output
 #+end_example
 **** Linked-List :linked_list:
 ***** Initialize
-#+begin_src LANG :results none :exports code :eval never
+#+begin_src LANG :session list_example :results none :exports code
 # CODE
 #+end_src
 ***** Use
-#+begin_src LANG :results output :exports both :wrap example
+#+begin_src LANG :session list_example :results output :exports both :wrap example
 # CODE
 #+end_src
 
@@ -344,11 +344,11 @@ Output
 #+end_example
 **** Record / Tuple / Struct :record:tuple:struct:
 ***** Initialize
-#+begin_src LANG :results none :exports code :eval never
+#+begin_src LANG :session record_example :results none :exports code
 # CODE
 #+end_src
 ***** Use
-#+begin_src LANG :results output :exports both :wrap example
+#+begin_src LANG :session record_example :results output :exports both :wrap example
 # CODE
 #+end_src
 
@@ -358,11 +358,11 @@ Output
 #+end_example
 **** Union :union:
 ***** Initialize
-#+begin_src LANG :results none :exports code :eval never
+#+begin_src LANG :session union_example :results none :exports code
 # CODE
 #+end_src
 ***** Use
-#+begin_src LANG :results output :exports both :wrap example
+#+begin_src LANG :session union_example :results output :exports both :wrap example
 # CODE
 #+end_src
 
@@ -372,11 +372,11 @@ Output
 #+end_example
 **** Dictionary :dictionary:
 ***** Initialize
-#+begin_src LANG :results none :exports code :eval never
+#+begin_src LANG :session dict_example :results none :exports code
 # CODE
 #+end_src
 ***** Use
-#+begin_src LANG :results output :exports both :wrap example
+#+begin_src LANG :session dict_example :results output :exports both :wrap example
 # CODE
 #+end_src
 
