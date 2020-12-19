@@ -1,0 +1,10 @@
+#+TITLE: ALGORITHM
+#+AUTHOR: AUTHOR
+#+EMAIL: EMAIL
+#+LANGUAGE: en
+#+FILETAGS: :ALGORITHM:
+
+* Summary :summary:
+* Explanation :explanation:
+* Example :example:
+* Pseudo-code :pseudo_code:
