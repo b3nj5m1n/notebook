@@ -1,0 +1,414 @@
+#+TITLE: DEV NOTEBOOK
+#+AUTHOR: Benjamin
+#+EMAIL: b3nj4m1n@gmx.net
+#+LANGUAGE: en
+
+
+* python :python:
+** Set-up :setup:
+*** Python 2 :python_2:
+**** Arch Linux :arch_linux:
+#+begin_src shell :results none :exports code :eval never
+pacman -S python2
+#+end_src
+*** Python 3 :python_3:
+**** Arch Linux :arch_linux:
+#+begin_src shell :results none :exports code :eval never
+pacman -S python3
+#+end_src
+** Snippets :snippet:
+*** I/O :i_o:
+**** Write to stdout :write:stdout:
+#+begin_src python :results output :exports both :wrap example
+print("Output")
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Output
+#+end_example
+
+**** Read from stdin :read:stdin:
+#+begin_src python :results none :exports both :wrap example :eval never
+input("Prompt: ")
+#+end_src
+
+**** Write to file :write:file:
+#+begin_src python :results none :exports both :wrap example :eval never
+with open("/path/to/file", "w") as file:
+    file.writelines(l)
+#+end_src
+
+**** Read from file :read:file:
+#+begin_src python :results none :exports both :wrap example :eval never
+with open("/path/to/file", "r") as file:
+    l = file.readlines()
+#+end_src
+*** Strings :string:
+**** Check if substring is contained :contained:
+#+begin_src python :results output :exports both :wrap example
+s = "This is a test."
+result = "test" in s
+print(result)
+result = "pineapple" in s
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+True
+False
+#+end_example
+**** Concatenate two strings :concat:
+#+begin_src python :results output :exports both :wrap example
+s1 = "This is "
+s2 = "a test."
+s = s1 + s2
+print(s)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+This is a test.
+#+end_example
+**** Compare with other string :compare:
+#+begin_src python :results output :exports both :wrap example
+s1 = "String 1"
+s2 = "String 2"
+result = s1 < s2
+print(result)
+result = s1 > s2
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+True
+False
+#+end_example
+**** Convert to Lowercase/Uppercase :lowercase:uppercase:
+#+begin_src python :results output :exports both :wrap example
+s = "This is a test."
+s_lower = s.lower()
+print(s_lower)
+s_upper = s.upper()
+print(s_upper)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+this is a test.
+THIS IS A TEST.
+#+end_example
+**** Get char at index :index:
+#+begin_src python :results output :exports both :wrap example
+s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+i = 6
+c = s[i]
+print(c)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+G
+#+end_example
+**** Get length :length:
+#+begin_src python :results output :exports both :wrap example
+s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+l = len(s)
+print(l)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+26
+#+end_example
+**** Is equal to other string :equal:
+#+begin_src python :results output :exports both :wrap example
+s1 = "String 1"
+s2 = "String 2"
+result = s1 == s2
+print(result)
+s2 = "String 1"
+result = s1 == s2
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+False
+True
+#+end_example
+**** Replace substring with string :replace:
+#+begin_src python :results output :exports both :wrap example
+s = "This is a pineapple."
+s_sub = "pineapple"
+s_for = "test"
+result = s.replace(s_sub, s_for)
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+This is a test.
+#+end_example
+**** Reverse :reverse:
+#+begin_src python :results output :exports both :wrap example
+s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+result = s[::-1]
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+ZYXWVUTSRQPONMLKJIHGFEDCBA
+#+end_example
+**** Split by delimiter :split:
+#+begin_src python :results output :exports both :wrap example
+s = "Pineapple,Butterfly,The Solar System"
+result = s.split(",")
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+['Pineapple', 'Butterfly', 'The Solar System']
+#+end_example
+**** Strip whitespace :strip:
+#+begin_src python :results output :exports both :wrap example
+s = "      (Tabs -> Editor -> Spaces) > (Tabs || Spaces)			"
+result = s.strip()
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+(Tabs -> Editor -> Spaces) > (Tabs || Spaces)
+#+end_example
+*** Conversions :onversion:
+**** Float -> Integer :float_to_integer:
+#+begin_src python :results none :exports code :eval never
+int(f)
+#+end_src
+**** Float -> String :float_to_string:
+#+begin_src python :results none :exports code :eval never
+str(f)
+#+end_src
+**** Integer -> Float :integer_to_float:
+#+begin_src python :results none :exports code :eval never
+float(i)
+#+end_src
+**** Integer -> String :integer_to_string:
+#+begin_src python :results none :exports code :eval never
+str(i)
+#+end_src
+**** String -> Float :string_to_float:
+#+begin_src python :results none :exports code :eval never
+float(s)
+#+end_src
+**** String -> Integer :string_to_integer:
+#+begin_src python :results none :exports code :eval never
+int(s)
+#+end_src
+*** Comparison & Boolean Operators :comparison:boolean_operator:
+**** And :and:
+#+begin_src python :results none :exports code :eval never
+and
+#+end_src
+**** Equal :equal:
+#+begin_src python :results none :exports code :eval never
+==
+#+end_src
+**** Greater Than :greater_than:
+#+begin_src python :results none :exports code :eval never
+>
+#+end_src
+**** Greater Than Or Equal :greater_than_or_equal:
+#+begin_src python :results none :exports code :eval never
+>=
+#+end_src
+**** Less Than :less_than:
+#+begin_src python :results none :exports code :eval never
+<
+#+end_src
+**** Less Than Or Equal :less_than_or_equal:
+#+begin_src python :results none :exports code :eval never
+<=
+#+end_src
+**** Not :not:
+#+begin_src python :results none :exports code :eval never
+not
+#+end_src
+**** Or :or:
+#+begin_src python :results none :exports code :eval never
+or
+#+end_src
+*** Flow-Control :flow_control:
+**** For-each Loop :for_each:
+#+begin_src python :results output :exports both :wrap example
+a = ["Arch Linux", "Linux Mint", "Debian"]
+for good_operating_system in a:
+    print(good_operating_system)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Arch Linux
+Linux Mint
+Debian
+#+end_example
+**** For Loop :for:
+#+begin_src python :results output :exports both :wrap example
+for i in range(5):
+    print(i)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+0
+1
+2
+3
+4
+#+end_example
+**** If, else if, else :if:else_if:else:
+#+begin_src python :results output :exports both :wrap example
+s = "Windows"
+if s == "Good Operating System":
+    print("Now based on linux with a windows sub-system!")
+elif s == "Not Updating":
+    print("There are updates available, do you want to install them now or would you prefer to install them now?")
+else:
+    print("🖕")
+#+end_src
+
+#+RESULTS:
+#+begin_example
+🖕
+#+end_example
+**** While Loop :while:
+#+begin_src python :results output :exports both :wrap example
+s = "f"
+while len(s) < 50:
+    s += "f"
+print(s)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+ffffffffffffffffffffffffffffffffffffffffffffffffff
+#+end_example
+*** Importing :import:
+**** Import Package :import_package:
+#+begin_src python :results none :exports code :eval never
+import PACKAGE_NAME
+#+end_src
+**** Import File :import_file:
+#+begin_src python :results none :exports code :eval never
+import ./path/filename.py
+#+end_src
+*** Classes :class:
+**** Define Class :define_class:
+#+begin_src python :session class_example :results none :exports code
+class coordinates:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+#+end_src
+**** Access Modifiers :access_modifiers:
+***** Public :public:
+Everything is public by default.
+***** Private :private:
+#+begin_src python :results none :exports code :eval never
+# Preceed with __
+__var = "Private"
+#+end_src
+***** Protected :protected:
+#+begin_src python :results none :exports code :eval never
+# Preceed with _
+_var = "Protected"
+#+end_src
+**** Initialize Object
+#+begin_src python :session class_example :results output :exports both :wrap example
+coords = coordinates(0, 0)
+print(coords.x)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+0
+#+end_example
+
+*** Functions :function:
+**** Define Function
+#+begin_src python :session function_example :results none :exports code
+def is_windows_good_yet():
+    return "Nope."
+#+end_src
+**** Call Function
+#+begin_src python :session function_example :results output :exports both :wrap example
+result = is_windows_good_yet()
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Nope.
+#+end_example
+
+*** Primitive Data Types :primitive_data_type:
+**** Character :character:
+#+begin_src python :results none :exports code :eval never
+c = 'c'
+#+end_src
+**** Integer :integer:
+#+begin_src python :results none :exports code :eval never
+i = 1
+#+end_src
+**** Float :float:
+#+begin_src python :results none :exports code :eval never
+f = 3.14
+#+end_src
+**** Boolean :boolean:
+#+begin_src python :results none :exports code :eval never
+true = False
+false = True
+#+end_src
+*** Data Structures :data_structure:
+**** Array :array:
+Python does not have arrays, use lists instead.
+**** Linked-List :linked_list:
+***** Initialize
+#+begin_src python :session list_example :results none :exports code
+l = [-1, 0, 1]
+#+end_src
+***** Use
+#+begin_src python :session list_example :results output :exports both :wrap example
+result = l[0]
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+-1
+#+end_example
+
+**** Dictionary :dictionary:
+***** Initialize
+#+begin_src python :session dict_example :results none :exports code
+d = {
+    "Linux": "Yeesss very good os mhhh",
+    "Windows": "👎",
+    "MacOS": "💸"
+}
+#+end_src
+***** Use
+#+begin_src python :session dict_example :results output :exports both :wrap example
+result = d["Linux"]
+print(result)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Yeesss very good os mhhh
+#+end_example
