@@ -441,3 +441,23 @@ puts "#{months["2"]}"
 ["1", "2"]
 February
 #+end_example
+
+* Frameworks :framework:
+** Ruby on Rails :ruby_on_rails:
+*** Set-up
+**** Latest Version :latest_version:
+***** Arch Linux :arch_linux:
+Install Ruby Version Manager
+#+begin_src shell
+yay -S rvm
+#+end_src
+Install rails
+#+begin_src shell
+gem install rails
+#+end_src
+*** Snippets :snippet:
+**** Set up new project :set_up_new_project:
+***** New bare bones project :new_bare_bones_project:
+#+begin_src LANG :results none :exports code :wrap example :eval never
+rails new TITLE
+#+end_src
