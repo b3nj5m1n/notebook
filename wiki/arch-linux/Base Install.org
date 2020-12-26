@@ -1,0 +1,87 @@
+#+TITLE: Arch Linux - Base System Installation
+#+FILETAGS: :linux:arch_linux:setup:
+
+* Scope
+This is the base install of arch linux. It will install the necessary components of arch linux, it's not a complete set-up.
+* Setting the keyboard layout
+First of all, let's list figure out what keyboard maps are available to us:
+#+begin_src shell
+ls /usr/share/kbd/keymaps/**/*.mp.gz
+#+end_src
+Now, find the keyboard map you want to use. If you can't spot immediately, you can use grep to narrow down the search. For example, let's try to find a German key-map:
+#+begin_src shell
+ls /usr/share/kbd/keymaps/**/*.mp.gz | grep "de"
+#+end_src
+After you've found the name for the keyboard layout you want to use, we can temporarily set it like this (Again with a German keyboard layout as an example):
+#+begin_src shell
+loadkeys de-latin1
+#+end_src
+* Connecting to the Internet
+** Wireless
+The program =wifi-menu= should be installed by default, you can use this to select the network you would like to connect to, enter the password and connect for the time of the installation process.
+#+begin_src shell
+wifi-menu
+#+end_src
+** LAN
+=dhcpcp= should already be enabled by default, so you should not have to do anything.
+** Verifying
+Let's ping some website to verify that our internet connection is working:
+#+begin_src shell
+ping github.com
+#+end_src
+* Setting the system time
+Last step before we can start the actual install, let's make sure to set the system time. First, update it:
+#+begin_src shell
+timedatectl set-ntp true
+#+end_src
+And verify that everything worked out as it should have:
+#+begin_src shell
+timedatectl status
+#+end_src
+Note that if this doesn't match your local time, it shouldn't be a cause for concern as you can always set the time and local later.
+* Partitioning the disks
+We're going to use fdisk to partition the disks, since that is what is available to us by default.
+First, let's list all connected disks:
+#+begin_src shell
+fdisk -l
+#+end_src
+Select the drive you would like to install arch on, then run this command, replacing X with the letter for your disk:
+#+begin_src shell
+fdisk /dev/sdX
+#+end_src
+Now we can create an ext4 file system on the new partition like this (Assuming the partition you want to install arch on is sdX1, where X is once again the letter of the disk your using):
+#+begin_src shell
+mkfs.ext4 /dev/sdX1
+#+end_src
+Finally, let's mount the file-system so that we can install the system:
+#+begin_src shell
+mount /dev/sdX1 /mnt
+#+end_src
+* Installing the base system
+** Editing the mirror list
+The command for installing the system is called =pacstrap=. It will use pacman for installing the packages, so let's make sure we're using good mirrors.
+Edit the file =/etc/pacman.d/mirrorlist= and comment out mirrors you do not want. Those would be the servers the furthest away from you.
+I'm going to use vim as my text editor here, but you could also use something like nano if you're not a vimja.
+#+begin_src shell
+vim /etc/pacman.d/mirrorlist
+#+end_src
+Note that you can entirely skip this step without it having too much of an impact, only the install of the base system might take a little longer, you can always change the mirror-list later down the road if you want to.
+** Installing the required packages
+A base install of arch is very lightweight, so this isn't going to take very long. We only need 3 meta packages. In case you're not already familiar with arch's package system, a meta package is basically an empty package without any dependencies, you can think of it as a sort of container which will install other packages.
+The base install of arch needs the packages =base=, =linux= and =linux-firmware=, so let's install those.
+#+begin_src shell
+pacstrap /mnt base linux linux-firmware
+#+end_src
+After this, you're basically all set up, but there's a few more packages you'll probably want to install.
+First, you'll need a text editor, so choose your favourite one, for example =neovim=.
+Then you'll probably also want to be able to execute commands as root without having to switch to the root account, so installing =sudo= is probably also a good idea.
+Finally, and most importantly, we need to have internet, for example to download and install more packages. We'll need the =dhcpcd= package for LAN.
+Let's install all of those packages:
+#+begin_src shell
+pacstrap /mnt neovim sudo dhcpcd
+#+end_src
+* Making the mount permanent
+In order to be able to boot into our new shiny system, we'll need to mount our partition at boot. Mounting is controlled by the file =/mnt/etc/fstab=, we can automatically generate the necessary config like this:
+#+begin_src shell
+genfstab -U /mnt >> /mnt/etc/fstab
+#+end_src
