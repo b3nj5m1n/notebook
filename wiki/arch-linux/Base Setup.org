@@ -1,0 +1,111 @@
+#+TITLE: Arch Linux - Base System Set-up
+#+FILETAGS: :linux:arch_linux:setup:
+
+This assumes that you've already done the [[file:Base Install.org::*Scope][Arch Linux base]] install.
+
+* Chroot onto the system
+We've already set up our system, but everything we do is currently being done on the USB stick with the arch iso on it.
+Chroot basically makes it like you're on your new system. We can use it like this:
+#+begin_src shell
+arch-chroot /mnt
+#+end_src
+* Set the time zone
+We want to create a symlink to =/etc/localtime= from a file corresponding to our time zone.
+The time zones are stored in =/usr/share/zoneinfo/=, then ordered by region and city. We can set our time zone like this:
+#+begin_src shell
+ln -sf /usr/share/zoneinfo/REGION/CITY /etc/localtime
+#+end_src
+Then update the system time like this:
+#+begin_src shell
+hwclock --systohc
+#+end_src
+* Set the locale
+First of all we'll need to uncomment the necessary locales in the file =/etc/locale.gen=:
+#+begin_src shell
+vim /etc/locale.gen
+#+end_src
+Now we can set the language variable in =/etc/locale.conf=:
+#+begin_src shell
+vim /etc/locale.conf
+#+end_src
+You're gonna want to input something like this:
+#+begin_quote
+LANG=en_GB.UTF-8
+#+end_quote
+And then finally generate the locales:
+#+begin_src shell
+locale-gen
+#+end_src
+* Network config
+Let's give our computer a name. We can use the command =hostnamectl= to modify the hostname (Where =HOSTNAME= is the name you want your computer to have):
+#+begin_src shell
+hostnamectl set-hostname HOSTNAME
+#+end_src
+* TODO Enable root for wheel users
+We have to edit the root config file for this, you should only ever do that using the command =visudo=:
+#+begin_src shell
+visudo
+#+end_src
+* Create a new user
+We don't want to use our pc as root, so let's create a new user. The command for this is called =useradd=. We're gonna make our user be a part of the group =wheel=, this will allow us to execute commands as root using =sudo=, and the initial login group will be =users=. Substitute =USERNAME= with the username you want to use:
+#+begin_src shell
+useradd --gid users --groups wheel -m USERNAME
+#+end_src
+Should you ever want to add an existing user to the =wheel= group, you can use the command =usermod=:
+#+begin_src shell
+usermod -a -G wheel USERNAME
+#+end_src
+Finally, let's make sure to give our user a password:
+#+begin_src shell
+passwd USERNAME
+#+end_src
+* Installing the boot loader
+We're going to use grub, let's install the package first:
+#+begin_src shell
+pacman -S grub
+#+end_src
+Now we have to use the command =grub-install= to install grub to our disk. Substitute X with the label of the disk you want to install grub on, for most people this will be the same disk as you've previously installed arch on, exceptions might be if you're dual booting arch with some other operating system. I'm going to assume that you want to do a fresh install of grub though:
+#+begin_src shell
+grub-install /dev/sdX
+#+end_src
+And having done that we can automatically generate the grub configuration like this:
+#+begin_src shell
+grub-mkconfig -o /boot/grub/grub.cfg
+#+end_src
+* Enable internet
+** Wireless
+This package will enable wifi support:
+#+begin_src shell
+pacman -S dialog wpa_supplicant
+#+end_src
+** LAN
+I've you've followed my guide for the base install, you'll already have =dhcpcd= installed, we still have to enable it though.
+#+begin_src shell
+systemctl enable dhcpcd
+#+end_src
+* Setting up a swap file
+Swap is basically working memory, but on your disk instead of RAM. There's two options for this, you can have an entire swap partition, or a swap file. They both have advantages and drawbacks, but personally I think that swap files are superior, and they're also easier to set up, so that's what we're going to do now. Note that you can do this at any point, even if you've already have a working system.
+First, we're gonna use =dd= to create an empty file called =swapfile= at =/= on our file-system. We'll use a block size of 1M, and have 8192 blocks of that size, it'll be 8GB in size in total. We can use this command for that:
+#+begin_src shell
+dd if=/dev/zero of=/swapfile bs=1M count=8192 status=progress
+#+end_src
+Now we'll set the appropriate file permissions:
+#+begin_src shell
+chmod 600 /swapfile
+#+end_src
+Now we'll make the file into usable swap:
+#+begin_src shell
+mkswap /swapfile
+#+end_src
+We can now activate the swap and make it usable by the system:
+#+begin_src shell
+swapon /swapfile
+#+end_src
+Finally, let's make it persistent. Right now, when we reboot our system, we have to do the =swapon= again, we can change that by editing the fstab file again:
+#+begin_src shell
+vim /etc/fstab
+#+end_src
+Put this into the fstab file:
+#+begin_quote
+/swapfile none swap defaults 0 0
+#+end_quote
