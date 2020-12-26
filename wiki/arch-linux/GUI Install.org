@@ -1,0 +1,21 @@
+#+TITLE: Arch Linux GUI Install
+#+FILETAGS: :linux:arch_linux:installation:setup:
+
+* Install xorg
+#+begin_src shell
+pacman -S xorg
+#+end_src
+* Install WM
+#+begin_src shell
+pacman -S bspwm
+#+end_src
+* Desktop Manager
+** Install DM
+#+begin_src shell
+pacman -S lightdm lightdm-gtk-greeter
+#+end_src
+** Start/Enable
+#+begin_src shell
+systemctl start lightdm
+systemctl enable lightdm
+#+end_src
