@@ -7,7 +7,7 @@ This repository is the home for all of my computer related notes. This includes 
 
 The directory structure is as follows:
 #+begin_src shell :results output :exports output :wrap example
-tree -P "EXAMPLE.org|README.org"
+tree -L 3 -P "EXAMPLE.org|README.org"
 #+end_src
 
 #+RESULTS:
@@ -20,10 +20,13 @@ tree -P "EXAMPLE.org|README.org"
 ├── languages
 │   └── EXAMPLE.org
 ├── README.org
-└── wiki
-    └── arch-linux
+├── wiki
+│   └── arch-linux
+└── writeups
+    └── adventofcode
+        └── 2020
 
-5 directories, 4 files
+8 directories, 4 files
 #+end_example
 
 * Algorithms
@@ -40,5 +43,7 @@ The languages directory contains notes on specific languages, as well as an =EXA
 A =LANGUAGE.org= file contains general information, such as *Set-up* instructions, *Snippets* (For when you haven't touched a language in a year and want to quickly refresh your mind on what the syntax looked like; This includes /Reading & Writing from and to stdin, stout & files/, /Common string operations/, /Type conversion/, /Comparisons & Boolean Operators/, /Flow-Control (If, else if, else, while, for, for-each)/, /Importing packages and files/, /Defining and using classes/, /defining and using functions/, /The available primitive data types/ and /data structures/.), *Troubleshooting* (Errors one might encounter and their solutions), and *Frameworks* (Which each can contain a /Set-up/, /Snippets/ and /Troubleshooting/ section.).
 * Wiki
 The wiki directory contains wiki-style documents on various topics.
+* Writeups
+The write-ups directory contains write-ups of various programs, for example advent of code.
 * General
 When something is written in all caps, that means its a variable which should be replaced.
