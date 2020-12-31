@@ -9,42 +9,42 @@ This is a walk-through of the [[http://www.blackhost.xyz/?id=hgm][blackhost hack
 ** Explanation
 The source code of the page contains the password in plain text, with the font-colour set to black so that it's not visible by default.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 <font color="black" size="1">Password: k5=vm[69:s_b}]}0</font></p>
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 k5=vm[69:s_b}]}0
-#+END_SRC
+#+end_example
 
 * Level 2
 ** Explanation
 The source code of the page contains the password in a comment.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 <!--Password: =h7003n*z^cu(6q.-->
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 =h7003n*z^cu(6q.
-#+END_SRC
+#+end_example
 
 * Level 3
 ** Explanation
 In the text under the input field, some of the letters are in italic. Put all of these letters together and you get the password. We will use javascript to extract the desired letters.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 <p><i>T</i>he hacker game is an hac<i>k</i>ing simulation game<i>.</i> In this game you have t<i>o</i> fi<i>n</i>d, and decrypt<i>/</i>decode if is ne<i>c</i>essary, a password, hidd<i>e</i>n in the page<i>!</i> This game has <i>2</i>0 levels and is divided in five diffe<i>r</i>ent sections:</p>
 <ol type="disc"><li><i>H</i>TML</li>
 <li>Java<i>S</i>cript</li>
 <li>Encoding &amp; <i>E</i>ncryption</li>
 <li>Ste<i>g</i>anography</li>
 <li>MySQL In<i>j</i>ection</li></ol>
-#+END_SRC
+#+end_src
 ** Solution Source
-#+BEGIN_SRC js :export code :eval never
+#+begin_src js :export code :eval never
 // This variable will store the result
 var result = ""
 // Query select every italic element in the relevant sections of the document, loop over each of them
@@ -54,156 +54,156 @@ document.querySelectorAll("html body div#wrap div#main i").forEach(function (ele
 });
 // Print out the result
 console.log(result)
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 Tk.on/ce!2rHSEgj
-#+END_SRC
+#+end_example
 
 * Level 4
 ** Explanation
 This time, there is some black text too, however it's not on the main page but on the page you get when you submit an incorrect answer.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 <p>Wrong password!<br />The password you entered is not correct, please <a href="" onclick="window.history.back()">go back</a> and try agaiN.. <font color="black" size="1">...or look here carefully! Password: 43{nm'-p78rem[t}</p>
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 43{nm'-p78rem[t}
-#+END_SRC
+#+end_example
 
 * Level 5
 ** Explanation
 The main page references a javascript file called in ~hgm/password.js~. This file contains the password as a variable.
 ** Page Source
 Main page
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 <script type="text/javascript" src="hgm/password.js"></script>
-#+END_SRC
+#+end_src
 hgm/password.js
-#+BEGIN_SRC js :export code :eval never
+#+begin_src js :export code :eval never
 var password = "null";
-#+END_SRC
+#+end_src
 ** Solution Source
-#+BEGIN_SRC js :export code :eval never
+#+begin_src js :export code :eval never
 console.log(password)
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 null
-#+END_SRC
+#+end_example
 
 * Level 6
 ** Explanation
 Here, the password is also just a js variable.
 ** Page Source
-#+BEGIN_SRC js :export code :eval never
+#+begin_src js :export code :eval never
 var password = window.script.type;
-#+END_SRC
+#+end_src
 ** Solution Source
-#+BEGIN_SRC js :export code :eval never
+#+begin_src js :export code :eval never
 console.log(password)
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 text/javascript
-#+END_SRC
+#+end_example
 
 * Level 7
 ** Explanation
 Once again, the password is just a js variable which we can log directly.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 var password = String.fromCharCode(94, 40, 37, 98, 51, 54, 114, 98, 102, 57, 103, 115, 117, 48, 113, 102);
-#+END_SRC
+#+end_src
 ** Solution Source
-#+BEGIN_SRC js :export code :eval never
+#+begin_src js :export code :eval never
 console.log(password)
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 ^(%b36rbf9gsu0qf
-#+END_SRC
+#+end_example
 * Level 8
 ** Explanation
 The password is a js variable again, however this time we have to call a function to set this variable before we can read it.
 ** Page Source
-#+BEGIN_SRC js :export code :eval never
+#+begin_src js :export code :eval never
 var keylist = "abcdefghijklmnopqrstuvwxyz1234567890^?=)(/&%$£-.,_:;òàùè+*é§°ç[]@#!";
 function gpw(){
     password = '';
     for (i=0; i<16; i++)
         password += keylist.charAt(i*4-(i*i%(3)));
 }
-#+END_SRC
+#+end_src
 ** Solution Source
-#+BEGIN_SRC js :export code :eval never
+#+begin_src js :export code :eval never
 gpw();
 console.log(password);
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 adhmpty26^)%,;è°
-#+END_SRC
+#+end_example
 * Level 9
 ** Explanation
 The password is hidden in the image nine.png, on the first red plane.
 ** Page Source
-#+BEGIN_SRC html
+#+begin_src html
 <img alt="" src="hgm/nine.png" />
-#+END_SRC
+#+end_src
 ** Solution
 We can use a tool such as stegsolve to view the first red plane and write down the password displayed on the bottom.
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 {6cK!h^z@2*)H3sA
-#+END_SRC
+#+end_example
 * Level 10
 ** Explanation
 The page shows an image which tells us to look for a photoshop document, changing the file extension of this image to .psd (Photoshop Document) will yield this file, one of the layers in this file contains the password.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 <img alt="" src="/hgm/ten.png" />
-#+END_SRC
+#+end_src
 ** Solution Source
-#+BEGIN_SRC bash :export code :eval never
+#+begin_src bash :export code :eval never
 wget www.blackhost.xyz/hgm/ten.psd
 gimp ten.psd
-#+END_SRC
+#+end_src
 Look for the layer names, you will find this:
-#+BEGIN_SRC :export code :eval never
+#+begin_src :export code :eval never
 Password: cdt=vlu1qncl4:,:
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 cdt=vlu1qncl4:,:
-#+END_SRC
+#+end_example
 * Level 11
 ** Explanation
 The page contains an image, the password is contained in the data of the file.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 <img alt="" src="/hgm/eleven.png">
-#+END_SRC
+#+end_src
 ** Solution Source
 First, we're going to download the file:
-#+BEGIN_SRC sh :export code :eval never
+#+begin_src sh :export code :eval never
 wget http://www.blackhost.xyz/hgm/eleven.png
-#+END_SRC
+#+end_src
 We can use a tool called strings (Installed on linux by default) to dump printable strings in data:
-#+BEGIN_SRC sh :export code :eval never
+#+begin_src sh :export code :eval never
 strings eleven.png
-#+END_SRC
+#+end_src
 Which will yield this:
-#+BEGIN_SRC :export code :eval never
+#+begin_src :export code :eval never
 IHDR
 sRGB
 gAMA
@@ -211,120 +211,182 @@ gAMA
 !IDATx^
 IEND
 password: .b%+z'tbj-)^tf*u
-#+END_SRC
+#+end_src
 Or we can use cat to dump the contents of the file:
-#+BEGIN_SRC sh :export code :eval never
+#+begin_src sh :export code :eval never
 cat eleven.png
-#+END_SRC
+#+end_src
 Which will yield a lot of random characters and this:
-#+BEGIN_SRC :export code :eval never
+#+begin_src :export code :eval never
 password: .b%+z'tbj-)^tf*u
-#+END_SRC
+#+end_src
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 .b%+z'tbj-)^tf*u
-#+END_SRC
+#+end_example
 * Level 12
 ** Explanation
 The web page shows an image, when analysing this image you will find that it contains a hidden rar archive, extracting this will give you a file called password.gif, which shows a qr code. This is the password.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 <img alt="" src="/hgm/twelve.gif" />
-#+END_SRC
+#+end_src
 ** Solution Source
 We will first use binwalk to scan the file for contained data.
-#+BEGIN_SRC bash :export code :eval never
+#+begin_src bash :export code :eval never
 binwalk twelve.gif
-#+END_SRC
-#+BEGIN_SRC :export code :eval never
+#+end_src
+#+begin_src :export code :eval never
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
 0             0x0             GIF image data, version "89a", 666 x 666
 81793         0x13F81         RAR archive data, version 4.x, first volume type: MAIN_HEAD
-#+END_SRC
+#+end_src
 As you can see, binwalk has found a rar archive, which we can extract like this:
-#+BEGIN_SRC bash :export code :eval never
+#+begin_src bash :export code :eval never
 binwalk -e twelve.gif
-#+END_SRC
+#+end_src
 Now open the password.gif file with an image viewer, (for example feh), then scan the qr code with a qr code scanner (for example binary eye).
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 !y%}_"v*"fk%6?gd
-#+END_SRC
+#+end_example
 * Level 13
 ** Explanation
 The website displays the password in binary, simply converting this is enough.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 01110100 01110110 00111101 00101110 00110010 00101101 00110011 00101011 00101010 01100100 00110000 01110111 00101011 00100100 00111010 00110111
-#+END_SRC
+#+end_src
 ** Solution
 Use some binary-text conversion tool/website (For example cyberchef).
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 tv=.2-3+*d0w+$:7
-#+END_SRC
+#+end_example
 * Level 14
 ** Explanation
 The website displays the password, url encoded.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 %36%3F%77%31%6C%2B%2E%7C%2A%78%31%25%5F%79%21%30
-#+END_SRC
+#+end_src
 ** Solution Source
 Url encoding is used for urls, we can leverage this to solve this problem with the search engine of our choice (For example searx). Simply focus the address bar in your browser, type something in and hit enter. Now go to the address bar again and look at the end where your search string shows up. Replace this with what is shown on the website and hit enter. The search bar of the search engine will now show the password.
 You could also use a tool for this, for example cyberchef can do this too.
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 6?w1l+.|*x1%_y!0
-#+END_SRC
+#+end_example
 * Level 15
 ** Explanation
 The website shows the password in base64 format.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 KHt8O2lfZDY6ZTZ5aigrXQ==
-#+END_SRC
+#+end_src
 ** Solution Source
 Once again use some tool to do the conversion, cyberchef can do this.
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 ({|;i_d6:e6yj(+]
-#+END_SRC
+#+end_example
 * Level 16
 ** Explanation
 The page contains a link to a .wav file, this file is a recording of morse code, decoding this will give us the password.
 ** Page Source
-#+BEGIN_SRC html :export code :eval never
+#+begin_src html :export code :eval never
 <embed src="hgm/16.wav" type="audio/mpeg" loop="false" hidden="true" />
-#+END_SRC
+#+end_src
 ** Solution Source
 Download the wav file and open it in audacity (Or a similar program). You will be able to tell short from long signals, with small gaps in between each signal and longer gaps between each letter. Write transcribe them to get this (Short signals = .; Long signals = -; New letters = space):
-#+BEGIN_SRC :export code :eval never
+#+begin_src :export code :eval never
 ....- .--. --- ... --- ----- ..- --... -..- -. ...- ... --... . .---- -.-
-#+END_SRC
+#+end_src
 Now you can use cyberchef again to convert this to text.
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 4POSO0U7XNVS7E1K
-#+END_SRC
+#+end_example
 * Level 17
 ** Explanation
 The page shows a string of seemingly random characters, this is in fact a md5 hash. The password is the string that produces this hash.
 ** Page Source
-#+BEGIN_SRC :export code :eval never
+#+begin_src :export code :eval never
 5f4dcc3b5aa765d61d8327deb882cf99
-#+END_SRC
+#+end_src
 ** Solution Source
 We can just do a quick search with our search engine of choice to see that this is the hash for the string ~password~
 ** Result
 The password is
-#+BEGIN_SRC :export code :eval never
+#+begin_example
 password
-#+END_SRC
+#+end_example
+* Level 18
+** Explanation
+The page shows the password in plain text, but we need to change the form to send a post request instead of a get request.
+** Page Source
+#+begin_src html :export code :eval never
+<p>5*8,"f48)_dvzj8L</p>
+<form method="get">
+<!--get request parameters-->
+<input type="hidden" name="id" value="hgm"> <input type=
+<form method="get">
+<!--get request parameters-->
+<input type="hidden" name="id" value="hgm" />
+<input type="hidden" name="lvl" value="19" />
+<!--end parameters-->
+<p>Password <input type="text" name="pass" class="input" />
+<input type="submit" value="Submit" class="input" /></p>
+</form>
+#+end_src
+** Solution Source
+We can simply change the form method and then add the form action property pointing at the correct page with the password shown on the page using inspect element in our browser. Note that we do have to url-encode the password, we can once again use cyberchef for that.
+#+begin_src html :export code :eval never
+<p>5*8,"f48)_dvzj8L</p>
+<form method="post" action="?id=hgm&amp;lvl=19&amp;pass=5*8,%22f48)_dvzj8L">
+<!--get request parameters-->
+<input type="hidden" name="id" value="hgm">
+<input type="hidden" name="lvl" value="19">
+<!--end parameters-->
+<p>Password <input type="text" name="pass" class="input" data-com.bitwarden.browser.user-edited="yes">
+<input type="submit" value="Submit" class="input"></p>
+</form>
+#+end_src
+Now just click on the submit button.
+** Result
+The password is
+#+begin_example
+5*8,"f48)_dvzj8L
+#+end_example
+* Level 19
+** Explanation
+The page asks us: =What is the Uniform Resuorce Locator of BlackHost?=. Uniform Resource Locator is the long form of URL, and the URL is obviously =blackhost.xyz=.
+** Page Source
+#+begin_src html :export code :eval never
+<p>What is the Uniform Resuorce Locator of BlackHost?</p>
+#+end_src
+** Solution Source
+It's literally just =blackhost.xyz=.
+** Result
+The password is
+#+begin_example
+blackhost.xyz
+#+end_example
+* Level 20
+** Explanation
+The page asks us: =What is your IP address?=. The password is your ip address.
+** Page Source
+#+begin_src html :export code :eval never
+<p>What is your IP address?</p>
+#+end_src
+** Solution Source
+We can do a quick search with our search engine of choice for any sort of =What's my ip address?= website, then use the result as the password.
+** Result
+The password is your ip address, so it's the first password that will be different for everyone.
