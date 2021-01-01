@@ -390,3 +390,28 @@ The page asks us: =What is your IP address?=. The password is your ip address.
 We can do a quick search with our search engine of choice for any sort of =What's my ip address?= website, then use the result as the password.
 ** Result
 The password is your ip address, so it's the first password that will be different for everyone.
+* Level 21
+** Explanation
+The page displays two entry fields this time. One for a username, one for a password. This site is vulnerable to SQL-injection.
+** Page Source
+#+begin_src html :export code :eval never
+<p>Username <input type="text" name="user" class="input" /><br />
+Password <input type="text" name="pass" class="input" />
+<input type="submit" value="Submit" class="input" /></p>
+#+end_src
+** Solution Source
+I won't go into detail about SQL injection here there's some great rescources online if you want to learn more.
+Basically, the password is submitted as a string, which is quoted in the SQL query. We can end those quotes, then write our own SQL logic.
+#+begin_src sql
+' OR '1'='1
+#+end_src
+First, we break out of the quotes with a single quote, then we write our own logic, =OR= means the previous expression (In this case something like where the password in the database is equal to the password we provided) OR whatever we put after, in our case '1'='1, which will always evaluate to true. We don't put another quote at the end since it'll already be there.
+** Result
+The username could be anything, for example:
+#+begin_example
+root
+#+end_example
+The password is (There's other ways to achieve the same thing, but one of the things that work is)
+#+begin_example
+' OR '1'='1
+#+end_example
