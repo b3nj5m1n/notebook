@@ -447,13 +447,13 @@ February
 *** Set-up
 **** Latest Version :latest_version:
 ***** Arch Linux :arch_linux:
-Install Ruby Version Manager
+Optionally install Ruby Version Manager
 #+begin_src shell
-yay -S rvm
+curl -L get.rvm.io > rvm-install
 #+end_src
 Install rails
 #+begin_src shell
-gem install rails
+yay -S ruby-rails
 #+end_src
 *** Snippets :snippet:
 **** Set up new project :set_up_new_project:
